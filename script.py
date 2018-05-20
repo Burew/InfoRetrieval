@@ -1,5 +1,6 @@
 import json 
 import sys
+import os
 from collections import defaultdict
 
 import test
@@ -17,7 +18,7 @@ def readAllFiles(bookkeeping):
 			docCount += 1
 			wordCount = defaultdict(int)  # Creates new dictionary for tokens within a CERTAIN FILE 
 			
-			pathName = r"WEBPAGES/WEBPAGES_RAW/" + fileLocation
+			pathName = "/Users/suneela/Desktop/school_stuff/Spring2018/CS121/WEBPAGES_RAW/" + fileLocation
 			totalWords = test.readFile(pathName, wordCount)
 			test.createIndex(wordCount, fileLocation)
 			fileTotalWords[fileLocation] += totalWords
@@ -45,14 +46,30 @@ if __name__ == '__main__':
 
 	#read files
 	if len(test.index) == 0:
-		fileName = r"WEBPAGES/WEBPAGES_RAW/bookkeeping.json" #sys.argv[1]
-		readAllFiles(fileName)
+		
+		readAllFiles(test.bookkeepingFilePath)
 
 	#init search console
-	search.userInput()
+	# search.userInput()
+
+	queries = ["INFORMATICS", "MONDEGO", "irvine"]
+		
+	for query in queries:
+		query = query.lower().strip()
+		if search.checkIfValidQuery(query) == True:
+			docs = search.retrieveAllDocs(query)
+			search.searchQuery(query,docs)
 	
 	#write dictionary to file
-	with open("dict.txt","w") as f:
+	invertedIndexPath = "dict.txt"
+	with open(invertedIndexPath,"w") as f:
 		f.write( json.dumps(test.index) )
 		f.close()
+
+
+	with open("reportFile.txt", "a") as metadataFile:
+		metadataFile.write("\n--------------------------------------------------\n")
+		metadataFile.write("Number of documents in corpus: " + str(len(test.bookkeepingDict)) + "\n")
+		metadataFile.write("Number of unique tokens in index: " + str(len(test.index)) + "\n")
+		metadataFile.write("Size of inverted index on disk: " + str(os.path.getsize(invertedIndexPath)) + " bytes\n")
 

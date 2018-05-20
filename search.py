@@ -7,7 +7,7 @@ def checkIfValidQuery(query):
 
 def userInput():
 	while True:
-		query = raw_input("Search: ") # MAKE SUR TO LOWERCASE QUERY
+		query = raw_input("Search: ").lower().strip()
 		if(query != "exit()"):
 			if checkIfValidQuery(query) == True:
 				docs = retrieveAllDocs(query)
@@ -26,8 +26,11 @@ def retrieveAllDocs(query):
 
 def searchQuery(query, all_documents):
 	f = open("reportFile.txt", 'a')
-	with open(r"WEBPAGES/WEBPAGES_RAW/bookkeeping.json") as json_file:
+	with open(test.bookkeepingFilePath) as json_file:
 		data = json.load(json_file)
+
+		test.bookkeepingDict = data
+
 		f.write("Token: " + query + "\n")
 
 		for eachDoc in all_documents:

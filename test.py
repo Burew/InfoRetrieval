@@ -8,6 +8,8 @@ import sys
  
 
 index = defaultdict(list)
+bookkeepingFilePath = "/Users/suneela/Desktop/school_stuff/Spring2018/CS121/WEBPAGES_RAW/bookkeeping.json"
+bookkeepingDict = {}
 
 def loadDict():
 	global index
@@ -16,7 +18,7 @@ def loadDict():
 			index = json.loads(indexFile.read())
 			print "Index loaded w/ " + str(len(index)) + " entries"
 	except:
-		print "Dictionary file not found"
+		print "Inverted index file not found, creating new one..."
 
 def readFile(file, tempDict):
 	openedFile = open(file, 'r')
@@ -28,7 +30,7 @@ def readFile(file, tempDict):
 
 	#tokenize, add wordcount 
 	for eachWord in tokens:
-		if(eachWord).isalpha():
+		if(eachWord).isalpha() and len(eachWord) > 1:
 			tempDict[eachWord.lower()] += 1
 			totalWordCount += 1
 
