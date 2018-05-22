@@ -1,2 +1,14 @@
-Token: limited
+Token: informatics
 	URL: wics.ics.uci.edu/category/news/info-session?afg12_page_id=2&afg44_page_id=4&afg34_page_id=4&afg15_page_id=2&afg42_page_id=2&afg22_page_id=2
+Token: irvine
+	URL: vision.ics.uci.edu/papers/RamananBK_ICCV_2007
+	URL: fano.ics.uci.edu/cites/Document/Fully-dynamic-min-cut.html
+	URL: fano.ics.uci.edu/cites/Author/Stefano-Leonardi.html
+	URL: fano.ics.uci.edu/cites/Author/Murray-Sherk.html
+	URL: fano.ics.uci.edu/cites/Publication/GesHofWal-TR-03.html
+	URL: www.ics.uci.edu/~dvk/pub/SIGMODR04_dvk.html
+
+--------------------------------------------------
+Number of documents in corpus: 14
+Number of unique tokens in index: 1161
+Size of inverted index on disk: 36885 bytes

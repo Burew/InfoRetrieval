@@ -8,15 +8,16 @@ import sys
  
 
 index = defaultdict(list)
-bookkeepingFilePath = "/Users/suneela/Desktop/school_stuff/Spring2018/CS121/WEBPAGES_RAW/bookkeeping.json"
+bookkeepingFilePath = r"WEBPAGES/WEBPAGES_RAW/bookkeepingTEST.json"
 bookkeepingDict = {}
 
 def loadDict():
 	global index
 	try:
 		with open("dict.txt") as indexFile:
-			index = json.loads(indexFile.read())
-			print "Index loaded w/ " + str(len(index)) + " entries"
+			# index = json.loads(indexFile.read())
+			index.update(json.load(indexFile))
+			print "Inverted Index loaded w/ " + str(len(index)) + " entries"
 	except:
 		print "Inverted index file not found, creating new one..."
 

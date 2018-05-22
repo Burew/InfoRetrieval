@@ -18,7 +18,7 @@ def readAllFiles(bookkeeping):
 			docCount += 1
 			wordCount = defaultdict(int)  # Creates new dictionary for tokens within a CERTAIN FILE 
 			
-			pathName = "/Users/suneela/Desktop/school_stuff/Spring2018/CS121/WEBPAGES_RAW/" + fileLocation
+			pathName = r"WEBPAGES/WEBPAGES_RAW/" + fileLocation
 			totalWords = test.readFile(pathName, wordCount)
 			test.createIndex(wordCount, fileLocation)
 			fileTotalWords[fileLocation] += totalWords

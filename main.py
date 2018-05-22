@@ -26,10 +26,10 @@ def loadBookkeeping():
 def loadInvertedIndex():
     try:
         with open(invertedIndexPath) as invertedIndexFile:
-            print "Inverted index loaded from \"" + invertedIndexPath + "\""
+            print("Inverted index loaded from \"" + invertedIndexPath + "\"")
             invertedIndex.update(json.load(invertedIndexFile)) 
     except:
-        print "Inverted index file \"" + invertedIndexPath + "\" not found, creating new inverted index..."
+        print("Inverted index file \"" + invertedIndexPath + "\" not found, creating new inverted index...")
         buildInvertedIndex()
         writeInvertedIndex()
 
@@ -86,11 +86,12 @@ def addInvertedIndexFromTokenCounts(tokenCounts, docID):
 """
 def buildInvertedIndex():
     #tokenize and record statistics
-    for docID in bookkeeping:
+    for docNum, docID in enumerate(bookkeeping):
         docFilePath = webpagesFilePath + docID
         tokensCount = buildTokensCountFromFile(docFilePath, docID)
         addInvertedIndexFromTokenCounts(tokensCount, docID)
-    
+
+        if (docNum % 500 == 0) print(str(docNum) + " Docs Processed")    
     # At this point, invertedIndex has these entries:
     #   token: [ [docID, num of occurances], [docID, num of occurances] ...]
     # After we calcualte TF-IDF, it will look like this:
@@ -117,10 +118,10 @@ def retrieveLinks(query):
     links = []
     linkLimit = 10
 
-    print query, invertedIndex[query]
+    # print(query, invertedIndex[query])
 
     for postings in invertedIndex[query]:
-        print(postings)
+        # print(postings)
         docID = postings[0]
         links.append(bookkeeping[docID])
         if len(links) >= linkLimit:
@@ -156,7 +157,7 @@ if __name__ == "__main__":
     for query in queries:
         query = query.strip().lower()
 
-        print query, invertedIndex[query]
+        # print(query, invertedIndex[query])
         links = retrieveLinks(stemmer.stem(query))
         
         addSearchResultToFile(query, links)
