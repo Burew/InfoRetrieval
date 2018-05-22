@@ -91,7 +91,8 @@ def buildInvertedIndex():
         tokensCount = buildTokensCountFromFile(docFilePath, docID)
         addInvertedIndexFromTokenCounts(tokensCount, docID)
 
-        if (docNum % 500 == 0) print(str(docNum) + " Docs Processed")    
+        if (docNum % 500 == 0):
+            print(str(docNum) + " Docs Processed")    
     # At this point, invertedIndex has these entries:
     #   token: [ [docID, num of occurances], [docID, num of occurances] ...]
     # After we calcualte TF-IDF, it will look like this:
